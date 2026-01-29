@@ -180,7 +180,10 @@ Summary: 1 package finished [x.xx s]
 
 **Your actual output:**
 ```
-[Paste your build summary here]
+[Starting >>> env_check_pkg
+Finished <<< env_check_pkg [0.18s]
+
+Summary: 1 package finished [0.49s]]
 ```
 
 ### 3.2 Run talker and listener
