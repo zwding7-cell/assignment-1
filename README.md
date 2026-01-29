@@ -70,7 +70,12 @@ python scripts/test_python_env.py
 
 **Output:**
 ```
-(.venv) yourusername@LAPTOP-V2JF7ABJ:~/PolyU-AAE5303-env-smork-test$ python scripts/test_python_env.py
+(.venv) yourusername@LAPTOP-V2JF7ABJ:~/PolyU-AAE5303-env-smork-test$ cd ~/PolyU-AAE5303-env-smork-test
+source .venv/bin/activate
+source /opt/ros/humble/setup.bash
+command -v ros2
+python3 scripts/test_python_env.py
+/opt/ros/humble/bin/ros2
 ========================================
 AAE5303 Environment Check (Python + ROS)
 Goal: help you verify your environment and understand what each check means.
@@ -94,6 +99,8 @@ Step 8: Open3D basic geometry + I/O (subprocess)
   Why: Open3D is a native extension; ABI mismatches can segfault. Subprocess isolation turns crashes into readable failures.
 Step 9: ROS toolchain checks
   Why: The course requires ROS tooling. This check passes if ROS 2 OR ROS 1 is available (either one is acceptable).
+  Action: building ROS 2 workspace package `env_check_pkg` (this may take 1-3 minutes on first run)...
+  Action: running ROS 2 talker/listener for a few seconds to verify messages flow...
 Step 10: Basic CLI availability
   Why: We confirm core commands exist on PATH so students can run the same commands as in the labs.
 
@@ -101,14 +108,14 @@ Step 10: Basic CLI availability
 ✅ Environment: {
   "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
   "python": "3.10.12",
-  "executable": "/home/yourusername/PolyU-AAE5303-env-smork-test/.venv/bin/python",
+  "executable": "/home/yourusername/PolyU-AAE5303-env-smork-test/.venv/bin/python3",
   "cwd": "/home/yourusername/PolyU-AAE5303-env-smork-test",
   "ros": {
-    "ROS_VERSION": null,
-    "ROS_DISTRO": null,
+    "ROS_VERSION": "2",
+    "ROS_DISTRO": "humble",
     "ROS_ROOT": null,
     "ROS_PACKAGE_PATH": null,
-    "AMENT_PREFIX_PATH": null,
+    "AMENT_PREFIX_PATH": "/opt/ros/humble",
     "CMAKE_PREFIX_PATH": null
   }
 }
@@ -117,7 +124,7 @@ Step 10: Basic CLI availability
 ✅ Module 'scipy' found (v1.15.3).
 ✅ Module 'matplotlib' found (v3.10.8).
 ✅ Module 'cv2' found (v4.13.0).
-✅ Missing optional module 'rclpy'.
+✅ Module 'rclpy' found (vunknown).
 ✅ numpy matrix multiply OK.
 ✅ numpy version 2.2.6 detected.
 ✅ scipy FFT OK.
@@ -126,16 +133,14 @@ Step 10: Basic CLI availability
 ✅ OpenCV OK (v4.13.0), decoded sample image 128x128.
 ✅ Open3D OK (v0.19.0), NumPy 2.2.6.
 ✅ Open3D loaded sample PCD with 8 pts and completed round-trip I/O.
-✅ ROS 2 CLI not found (acceptable if ROS 1 is installed).
+✅ ROS 2 CLI OK: /opt/ros/humble/bin/ros2
 ✅ ROS 1 tools not found (acceptable if ROS 2 is installed).
-❌ ROS requirement not satisfied: neither ROS 2 nor ROS 1 appears to be installed/working.
-   ↳ Fix: Install either ROS 2 (recommended) or ROS 1, then open a new terminal and source it:
-  - ROS 2 (Humble): source /opt/ros/humble/setup.bash
-  - ROS 1 (Noetic): source /opt/ros/noetic/setup.bash
-If you are in a container/VM, ensure you followed the official installation guide and that the binaries are on PATH.
+✅ colcon found: /usr/bin/colcon
+✅ ROS 2 workspace build OK (env_check_pkg).
+✅ ROS 2 runtime OK: talker and listener exchanged messages.
 ✅ Binary 'python3' found at /home/yourusername/PolyU-AAE5303-env-smork-test/.venv/bin/python3
 
-Environment check failed (1 issue(s)).
+All checks passed. You are ready for AAE5303 🚀
 ```
 
 ```bash
@@ -158,7 +163,9 @@ python scripts/test_open3d_pointcloud.py
 
 **Screenshot:**  
 _[Include one screenshot showing both tests passing]_
-<img width="1642" height="1495" alt="image" src="https://github.com/user-attachments/assets/45150b91-5bf2-4ee0-8b0d-8656d1dd39c5" />
+<img width="1281" height="969" alt="image" src="https://github.com/user-attachments/assets/f56c129d-ddc5-4566-ac40-51f39057693d" />
+<img width="1399" height="263" alt="image" src="https://github.com/user-attachments/assets/b94d4f2c-2ddf-4740-84a2-19e3d9487a62" />
+
 
 ---
 
@@ -180,10 +187,11 @@ Summary: 1 package finished [x.xx s]
 
 **Your actual output:**
 ```
-[Starting >>> env_check_pkg
-Finished <<< env_check_pkg [0.18s]
+[colcon build
+Starting >>> env_check_pkg
+Finished <<< env_check_pkg [6.97s]                     
 
-Summary: 1 package finished [0.49s]]
+Summary: 1 package finished [7.24s]]
 ```
 
 ### 3.2 Run talker and listener
