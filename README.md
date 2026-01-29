@@ -251,37 +251,50 @@ _[Terminal output, official ROS 2 documentation, and AI assistant]_
 
 ---
 
-### Issue 2: [Another real error or roadblock]
+### Issue 2: [failed due to missing file]
 
 **Cause / diagnosis:**  
-_[Explain what you think caused it]_
+_[The repository did not provide a requirements.txt file. Attempting to follow
+generic Python setup instructions resulted in a file-not-found error.]_
 
 **Fix:**  
-_[The exact command/config change you used to solve it]_
+_[Instead of installing dependencies blindly, I inspected the repository structure
+and README.md. I verified the Python environment by running the provided test
+scripts directly and checking Python and pip versions inside the virtual
+environment.]_
 
 ```bash
-[Your fix command/code here]
+[python --version
+pip --version
+]
 ```
 
 **Reference:**  
-_[Official ROS docs? StackOverflow? AI assistant? Something else?]_
+_[Repository README.md and AI assistant]_
 
 ---
 
-### Issue 3 (Optional): [Title]
+### Issue 3 (Optional): [Confusion between Python virtual environment and ROS environment]
 
 **Cause / diagnosis:**  
-_[Explain what you think caused it]_
+_[At first, I assumed activating the Python virtual environment would also make
+ROS tools available. I later realized that Python virtual environments and ROS
+environments are independent and must be sourced separately.]_
 
 **Fix:**  
-_[The exact command/config change you used to solve it]_
+_[I learned to clearly separate responsibilities:
+
+Use .venv for Python package isolation
+
+Use source /opt/ros/humble/setup.bash for ROS tooling]_
 
 ```bash
-[Your fix command/code here]
+[source .venv/bin/activate
+source /opt/ros/humble/setup.bash]
 ```
 
 **Reference:**  
-_[Official ROS docs? StackOverflow? AI assistant? Something else?]_
+_[ROS 2 documentation and AI assistant explanation.]_
 
 ---
 
@@ -295,14 +308,19 @@ Choose one of the issues above and document how you used AI to solve it.
 
 **Your prompt:**
 ```
-[Copy-paste your actual message to the AI, not a summary]
+[My Python environment test says:
+"ROS requirement not satisfied: neither ROS 2 nor ROS 1 appears to be installed/working".
+But I already installed ROS 2. Why does this happen and how do I fix it?]
 ```
 
 ### 5.2 Key helpful part of the AI's answer
 
 **AI's response (relevant part only):**
 ```
-[Quote only the relevant part of the AI's answer]
+[This usually happens when ROS is installed but the setup.bash file has not been
+sourced in the current terminal. You need to run:
+source /opt/ros/humble/setup.bash
+before running any ROS-related commands.]
 ```
 
 ### 5.3 What you changed or ignored and why
@@ -313,18 +331,23 @@ Explain briefly:
 - Did you double-check with official docs?
 
 **Your explanation:**  
-_[Write your analysis here]_
+_[The AI suggested sourcing the ROS environment, which aligned with the official
+ROS documentation. I verified the solution by checking environment variables
+after sourcing. No unsafe or unnecessary steps were suggested, so the solution
+was applied directly.]_
 
 ### 5.4 Final solution you applied
 
 Show the exact command or file edit that fixed the problem:
 
 ```bash
-[Your final command/code here]
+[source /opt/ros/humble/setup.bash]
 ```
 
 **Why this worked:**  
-_[Brief explanation]_
+_[Sourcing the ROS setup file correctly configured the environment variables and
+PATH entries required for ROS tools, allowing the Python test script to detect
+the ROS installation successfully.]_
 
 ---
 
@@ -339,7 +362,14 @@ Short but thoughtful:
 
 **Your reflection:**
 
-_[Write your 3-5 sentence reflection here]_
+_[This setup process helped me understand that robotics environments are composed
+of multiple independent layers, such as Python virtual environments and ROS
+toolchains. I was surprised by how many issues were caused simply by environment
+variables not being sourced correctly. Through debugging, I learned to rely on
+terminal outputs and error messages instead of guessing. Next time, I would read
+the repository structure more carefully before running installation commands.
+Overall, I feel more confident in diagnosing and fixing ROS and Python
+environment issues.]_
 
 ---
 
@@ -348,13 +378,13 @@ _[Write your 3-5 sentence reflection here]_
 ✅ **I confirm that I performed this setup myself and all screenshots/logs reflect my own environment.**
 
 **Name:**  
-_[Your name]_
+_[Ding Zhongwei]_
 
 **Student ID:**  
-_[Your student ID]_
+_[25059382G]_
 
 **Date:**  
-_[Date of submission]_
+_[2026/01/29]_
 
 ---
 
