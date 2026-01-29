@@ -34,7 +34,7 @@ _[Choose one:]_
 Describe briefly how you created/activated your Python environment:
 
 **Tool used:**  
-_[venv / conda / system Python]_
+_[venv]_
 
 **Key commands you ran:**
 ```bash
@@ -44,7 +44,27 @@ pip install -r requirements.txt
 ```
 
 **Any deviations from the default instructions:**  
-_[Describe any changes you made, or write "None"]_
+
+📷 **Screenshot**  
+<img width="1159" height="193" alt="image" src="https://github.com/user-attachments/assets/9a7c343a-5467-4044-86f5-9d46d51781ac" />
+
+```markdown
+### Issue 1: requirements.txt not found
+
+Problem:
+pip install -r requirements.txt failed because the file does not exist.
+
+Cause:
+The repository only contains a README.md file and does not provide a
+requirements.txt file.
+
+Solution:
+Instead of installing dependencies, the Python environment was verified by
+checking Python and pip versions directly.
+
+Verification:
+Python virtual environment was activated successfully and version checks passed.
+
 
 ### 2.2 Test Results
 
