@@ -8,13 +8,13 @@
 ## 1. System Information
 
 **Laptop model:**  
-_[Your laptop model, e.g., Dell XPS 15, MacBook Pro M1, etc.]_
+_[LAPTOP-V2JF7ABJ.]_
 
 **CPU / RAM:**  
-_[e.g., Intel Core i7-11800H, 16GB RAM]_
+_[Intel(R) Core(TM) Ultra 9 275HX (2.70 GHz)，16GB RAM]_
 
 **Host OS:**  
-_[Windows 11 / macOS / Ubuntu 22.04]_
+_[Windows 11]_
 
 **Linux/ROS environment type:**  
 _[Choose one:]_
