@@ -19,7 +19,7 @@ _[Windows 11]_
 **Linux/ROS environment type:**  
 _[Choose one:]_
 - [ ] Dual-boot Ubuntu
-- [ ] WSL2 Ubuntu
+- [√ ] WSL2 Ubuntu
 - [ ] Ubuntu in VM (UTM/VirtualBox/VMware/Parallels)
 - [ ] Docker container
 - [ ] Lab PC
@@ -210,7 +210,11 @@ ros2 run env_check_pkg talker.py
 
 **Output (3–4 lines):**
 ```
-[Paste 3-4 lines of talker output here]
+[[INFO] [1769689108.890873868] [env_check_pkg_talker]: AAE5303 talker ready (publishing at 2 Hz).
+[INFO] [1769689109.414385206] [env_check_pkg_talker]: Publishing: 'AAE5303 hello #0'
+[INFO] [1769689109.937667815] [env_check_pkg_talker]: Publishing: 'AAE5303 hello #1'
+[INFO] [1769689110.461002431] [env_check_pkg_talker]: Publishing: 'AAE5303 hello #2'
+[INFO] [1769689110.984384991] [env_check_pkg_talker]: Publishing: 'AAE5303 hello #3']
 ```
 
 **Run listener:**
@@ -220,7 +224,11 @@ ros2 run env_check_pkg listener.py
 
 **Output (3–4 lines):**
 ```
-[Paste 3-4 lines of listener output here]
+[[INFO] [1769689095.287726640] [env_check_pkg_listener]: AAE5303 listener awaiting messages.
+[INFO] [1769689109.414533182] [env_check_pkg_listener]: I heard: 'AAE5303 hello #0'
+[INFO] [1769689109.937933721] [env_check_pkg_listener]: I heard: 'AAE5303 hello #1'
+[INFO] [1769689110.461294981] [env_check_pkg_listener]: I heard: 'AAE5303 hello #2'
+[INFO] [1769689110.984589435] [env_check_pkg_listener]: I heard: 'AAE5303 hello #3']
 ```
 
 **Alternative (using launch file):**
@@ -231,7 +239,8 @@ ros2 launch env_check_pkg env_check.launch.py
 **Screenshot:**  
 _[Include one screenshot showing talker + listener running]_
 
-![Talker and Listener Running](path/to/your/screenshot.png)
+<img width="1412" height="1071" alt="image" src="https://github.com/user-attachments/assets/cc315eb9-6ac0-40dd-b64a-6c994239bbf8" />
+
 
 ---
 
@@ -400,13 +409,13 @@ _[2026/01/29]_
 
 Before submitting, ensure you have:
 
-- [ ] Filled in all system information
-- [ ] Included actual terminal outputs (not just screenshots)
-- [ ] Provided at least 2 screenshots (Python tests + ROS talker/listener)
-- [ ] Documented 2–3 real problems with solutions
-- [ ] Completed the AI usage section with exact prompts
-- [ ] Written a thoughtful reflection (3–5 sentences)
-- [ ] Signed the declaration
+- [ √] Filled in all system information
+- [√ ] Included actual terminal outputs (not just screenshots)
+- [√ ] Provided at least 2 screenshots (Python tests + ROS talker/listener)
+- [√ ] Documented 2–3 real problems with solutions
+- [√ ] Completed the AI usage section with exact prompts
+- [√ ] Written a thoughtful reflection (3–5 sentences)
+- [√ ] Signed the declaration
 
 ---
 
