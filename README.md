@@ -46,6 +46,19 @@ pip install -r requirements.txt
 **Any deviations from the default instructions:**  
 
 The repository does not provide a requirements.txt file.
+Problem:
+pip install -r requirements.txt failed because the file does not exist.
+
+Cause:
+The repository only contains a README.md file and does not include a
+requirements.txt file for dependency installation.
+
+Solution:
+Instead of installing dependencies, the Python environment was verified by
+checking Python and pip versions directly.
+
+Verification:
+The virtual environment activated successfully and Python version checks passed.
 
 ### 2.2 Test Results
 
@@ -57,7 +70,72 @@ python scripts/test_python_env.py
 
 **Output:**
 ```
-[Paste your actual terminal output here]
+(.venv) yourusername@LAPTOP-V2JF7ABJ:~/PolyU-AAE5303-env-smork-test$ python scripts/test_python_env.py
+========================================
+AAE5303 Environment Check (Python + ROS)
+Goal: help you verify your environment and understand what each check means.
+========================================
+
+Step 1: Environment snapshot
+  Why: We capture platform/Python/ROS variables to diagnose common setup mistakes (especially mixed ROS env).
+Step 2: Python version
+  Why: The course assumes Python 3.10+; older versions often break package wheels.
+Step 3: Python imports (required/optional)
+  Why: Imports verify packages are installed and compatible with your Python version.
+Step 4: NumPy sanity checks
+  Why: We run a small linear algebra operation so success means more than just `import numpy`.
+Step 5: SciPy sanity checks
+  Why: We run a small FFT to confirm SciPy is functional (not just installed).
+Step 6: Matplotlib backend check
+  Why: We generate a tiny plot image (headless) to confirm plotting works on your system.
+Step 7: OpenCV PNG decoding (subprocess)
+  Why: PNG decoding uses native code; we isolate it so corruption/codec issues cannot crash the whole report.
+Step 8: Open3D basic geometry + I/O (subprocess)
+  Why: Open3D is a native extension; ABI mismatches can segfault. Subprocess isolation turns crashes into readable failures.
+Step 9: ROS toolchain checks
+  Why: The course requires ROS tooling. This check passes if ROS 2 OR ROS 1 is available (either one is acceptable).
+Step 10: Basic CLI availability
+  Why: We confirm core commands exist on PATH so students can run the same commands as in the labs.
+
+=== Summary ===
+✅ Environment: {
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "python": "3.10.12",
+  "executable": "/home/yourusername/PolyU-AAE5303-env-smork-test/.venv/bin/python",
+  "cwd": "/home/yourusername/PolyU-AAE5303-env-smork-test",
+  "ros": {
+    "ROS_VERSION": null,
+    "ROS_DISTRO": null,
+    "ROS_ROOT": null,
+    "ROS_PACKAGE_PATH": null,
+    "AMENT_PREFIX_PATH": null,
+    "CMAKE_PREFIX_PATH": null
+  }
+}
+✅ Python version OK: 3.10.12
+✅ Module 'numpy' found (v2.2.6).
+✅ Module 'scipy' found (v1.15.3).
+✅ Module 'matplotlib' found (v3.10.8).
+✅ Module 'cv2' found (v4.13.0).
+✅ Missing optional module 'rclpy'.
+✅ numpy matrix multiply OK.
+✅ numpy version 2.2.6 detected.
+✅ scipy FFT OK.
+✅ scipy version 1.15.3 detected.
+✅ matplotlib backend OK (Agg), version 3.10.8.
+✅ OpenCV OK (v4.13.0), decoded sample image 128x128.
+✅ Open3D OK (v0.19.0), NumPy 2.2.6.
+✅ Open3D loaded sample PCD with 8 pts and completed round-trip I/O.
+✅ ROS 2 CLI not found (acceptable if ROS 1 is installed).
+✅ ROS 1 tools not found (acceptable if ROS 2 is installed).
+❌ ROS requirement not satisfied: neither ROS 2 nor ROS 1 appears to be installed/working.
+   ↳ Fix: Install either ROS 2 (recommended) or ROS 1, then open a new terminal and source it:
+  - ROS 2 (Humble): source /opt/ros/humble/setup.bash
+  - ROS 1 (Noetic): source /opt/ros/noetic/setup.bash
+If you are in a container/VM, ensure you followed the official installation guide and that the binaries are on PATH.
+✅ Binary 'python3' found at /home/yourusername/PolyU-AAE5303-env-smork-test/.venv/bin/python3
+
+Environment check failed (1 issue(s)).
 ```
 
 ```bash
@@ -66,13 +144,21 @@ python scripts/test_open3d_pointcloud.py
 
 **Output:**
 ```
-[Paste your actual terminal output here]
+(.venv) yourusername@LAPTOP-V2JF7ABJ:~/PolyU-AAE5303-env-smork-test$ python scripts/test_open3d_pointcloud.py
+ℹ️ Loading /home/yourusername/PolyU-AAE5303-env-smork-test/data/sample_pointcloud.pcd ...
+✅ Loaded 8 points.
+   • Centroid: [0.025 0.025 0.025]
+   • Axis-aligned bounds: min=[0. 0. 0.], max=[0.05 0.05 0.05]
+✅ Filtered point cloud kept 7 points.
+✅ Wrote filtered copy with 7 points to /home/yourusername/PolyU-AAE5303-env-smork-test/data/sample_pointcloud_copy.pcd
+   • AABB extents: [0.05 0.05 0.05]
+   • OBB  extents: [0.08164966 0.07071068 0.05773503], max dim 0.0816 m
+🎉 Open3D point cloud pipeline looks good.
 ```
 
 **Screenshot:**  
 _[Include one screenshot showing both tests passing]_
-
-![Python Tests Passing](path/to/your/screenshot.png)
+<img width="1642" height="1495" alt="image" src="https://github.com/user-attachments/assets/45150b91-5bf2-4ee0-8b0d-8656d1dd39c5" />
 
 ---
 
@@ -142,20 +228,23 @@ _[Include one screenshot showing talker + listener running]_
 
 > **Note:** Write 2–3 issues, even if small. This section is crucial — it demonstrates understanding and problem-solving.
 
-### Issue 1: [Write the exact error message or problem]
+### Issue 1: [ROS requirement not satisfied during Python environment test.]
 
 **Cause / diagnosis:**  
-_[Explain what you think caused it]_
+_[The Python test script was executed inside a virtual environment without
+sourcing the ROS 2 setup file. Therefore, ROS-related commands were not
+available in that terminal session.]_
 
 **Fix:**  
-_[The exact command/config change you used to solve it]_
+_[Opened a new terminal and manually sourced the ROS 2 environment before running
+any ROS-related commands.]_
 
 ```bash
-[Your fix command/code here]
+[source /opt/ros/humble/setup.bash]
 ```
 
 **Reference:**  
-_[Official ROS docs? StackOverflow? AI assistant? Something else?]_
+_[Terminal output, official ROS 2 documentation, and AI assistant]_
 
 ---
 
